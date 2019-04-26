@@ -7,3 +7,7 @@
 *.iml
 out
 gen
+/bank-consumer/.mvn/
+/bank-service/.mvn/
+/eureka-server/.mvn/
+/finance-web/.mvn/
