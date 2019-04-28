@@ -1,5 +1,7 @@
 package com.mark.bankservice.service.impl;
 
+import com.github.rholder.retry.*;
+import com.google.common.base.Predicates;
 import com.mark.bankservice.dao.DbLinkMapper;
 import com.mark.bankservice.service.IIpQueryService;
 import org.slf4j.Logger;
@@ -12,6 +14,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by mark .
@@ -55,6 +60,31 @@ public class IpQueryServiceImpl implements IIpQueryService {
         }else {
             throw new RuntimeException("重试");
         }
-
     }
+
+
+    public void testRetryer(){
+        Callable<Boolean> callable = () -> {
+            logger.info("执行方法");
+            return false;
+        };
+
+        Retryer<Boolean> retryer = RetryerBuilder.<Boolean>newBuilder()
+                //抛出runtime异常、checked异常时都会重试，但是抛出error不会重试。
+                .retryIfException()
+                //返回false也需要重试
+                .retryIfResult(Predicates.equalTo(false))
+                //重调策略
+                .withWaitStrategy(WaitStrategies.fixedWait(10, TimeUnit.SECONDS))
+                //尝试次数
+                .withStopStrategy(StopStrategies.stopAfterAttempt(3))
+                .build();
+
+        try {
+            retryer.call(callable);
+        } catch (ExecutionException | RetryException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

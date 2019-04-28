@@ -17,4 +17,9 @@ public class BankServiceApplicationTests extends AbstractTestNGSpringContextTest
 		queryService.isIpAddress(false);
 	}
 
+	@Test
+	public void testGuavaRetry() {
+		queryService.testRetryer();
+	}
+
 }
