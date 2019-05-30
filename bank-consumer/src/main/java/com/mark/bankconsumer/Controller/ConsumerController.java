@@ -26,4 +26,10 @@ public class ConsumerController {
         return restTemplate.getForEntity("http://BANK-SERVICE/hello", String.class).getBody();
     }
 
+
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public String getShowIndex() {
+        return restTemplate.getForEntity("http://BANK-SERVICE/showIndex", String.class).getBody();
+    }
+
 }
