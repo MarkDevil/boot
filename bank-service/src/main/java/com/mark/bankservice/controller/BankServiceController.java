@@ -1,13 +1,13 @@
 package com.mark.bankservice.controller;
 
+import com.mark.bankservice.dto.DbLinkDto;
+import com.mark.bankservice.service.IIpQueryService;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,25 +16,17 @@ import java.util.List;
  * @author mark
  */
 @RestController
+@RequestMapping("/api")
 public class BankServiceController {
     private org.slf4j.Logger logger = LoggerFactory.getLogger(BankServiceController.class);
 
 
-    private final DiscoveryClient discoveryClient;
+    @Resource
+    private IIpQueryService iIpQueryService;
 
-    @Autowired
-    public BankServiceController(DiscoveryClient discoveryClient) {
-        this.discoveryClient = discoveryClient;
-        List<String> services = this.discoveryClient.getServices();
-        logger.info("Get services from server: {}",services.toString());
-    }
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String index() {
-        List<ServiceInstance> instances = discoveryClient.getInstances("bank-service");
-        for (ServiceInstance instance : instances) {
-            logger.info("/hello,host:" + instance.getHost() + ",service_id:" + instance.getServiceId());
-        }
-        return "Hello World";
+    @RequestMapping(value = "/findDbLinks")
+    public List<DbLinkDto> findDbLinks(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize) {
+        return iIpQueryService.findIpAddressByPage(page,pageSize);
     }
 }

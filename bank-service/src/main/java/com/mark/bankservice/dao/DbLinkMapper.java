@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Component
 public interface DbLinkMapper {
-    @Select("select * from q_api_db_link;")
+    @Select("select * from q_api_db_link")
     List<DbLinkDto> findAllDbLinks();
 
 
