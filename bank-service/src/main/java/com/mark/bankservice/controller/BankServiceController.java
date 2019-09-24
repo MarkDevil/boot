@@ -2,7 +2,7 @@ package com.mark.bankservice.controller;
 
 import com.mark.bankservice.dto.DbLinkDto;
 import com.mark.bankservice.service.IIpQueryService;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,9 +17,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class BankServiceController {
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(BankServiceController.class);
-
 
     @Resource
     private IIpQueryService iIpQueryService;
