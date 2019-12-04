@@ -1,4 +1,4 @@
-package com.mark.bankservice.utils;
+package com.mark.bank.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

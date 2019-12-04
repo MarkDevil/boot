@@ -1,18 +1,12 @@
-package com.mark.bankservice.utils;
+package com.mark.bank.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.vipkid.finautotest.entity.financeqa3.AutoTestResultDiffEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -164,51 +158,7 @@ public class CompareUtils {
         }
     }
 
-    /**
-     * 比较对象值的变化
-     * @param oldBean
-     * @param newBean
-     * @param includeField 不比较的对象
-     */
-    public <T> List<AutoTestResultDiffEntity> compareObject(Object oldBean, Object newBean, List<String> includeField){
-        List<AutoTestResultDiffEntity> autoTestResultDiffEntities = new ArrayList<>();
-        T pojo1 = (T) oldBean;
-        T pojo2 = (T) newBean;
-        try {
-            Class clazz1 = pojo1.getClass();
-            Class clazz2 = pojo2.getClass();
-            Field[] fields = pojo1.getClass().getDeclaredFields();
-            for (Field field : fields) {
-                String fieldName = field.getName();
-                if (!includeField.contains(fieldName)) {
-                    continue;
-                }
-                PropertyDescriptor pd1 = new PropertyDescriptor(fieldName, clazz1);
-                PropertyDescriptor pd2 = new PropertyDescriptor(fieldName, clazz2);
-                Method getMethod1 = pd1.getReadMethod();
-                Method getMethod2 = pd2.getReadMethod();
-                Object ov = getMethod1.invoke(pojo1);
-                Object nv = getMethod2.invoke(pojo2);
-                if (ov == null || nv == null) {
-                    continue;
-                }
-                if (!ov.toString().equals(nv.toString())) {
-                    AutoTestResultDiffEntity autoTestResultDiffEntity = new AutoTestResultDiffEntity();
-                    autoTestResultDiffEntity.setFieldName(fieldName);
-                    autoTestResultDiffEntity.setOldVal(String.valueOf(ov));
-                    autoTestResultDiffEntity.setNewVal(String.valueOf(nv));
-                    autoTestResultDiffEntity.setCreateTime(CommUtil.getCurrentTimestamp());
-                    autoTestResultDiffEntity.setUpdateTime(CommUtil.getCurrentTimestamp());
-                    log.info("数据变更:{}",autoTestResultDiffEntity.toString());
-                    autoTestResultDiffEntities.add(autoTestResultDiffEntity);
-                }
-            }
-            return autoTestResultDiffEntities;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+
 
     /**
      * 接口返回是否成功

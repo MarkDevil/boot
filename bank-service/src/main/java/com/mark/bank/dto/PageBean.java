@@ -1,4 +1,4 @@
-package com.mark.bankservice.dto;
+package com.mark.bank.dto;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 

@@ -1,7 +1,7 @@
-package com.mark.bankservice.aspect;
+package com.mark.bank.aspect;
 
-import com.mark.bankservice.dto.Response;
-import com.mark.bankservice.utils.ConcurrentStopWatch;
+import com.mark.bank.dto.Response;
+import com.mark.bank.utils.ConcurrentStopWatch;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -22,7 +22,7 @@ public class ErrHandlerAspect {
 
     private ConcurrentStopWatch concurrentStopWatch = new ConcurrentStopWatch();
 
-    @Pointcut(value = "execution(* com.*.*(..))")
+    @Pointcut(value = "execution(* com.mark.bank..*.*(..))")
     private void pointCut(){
 
     }

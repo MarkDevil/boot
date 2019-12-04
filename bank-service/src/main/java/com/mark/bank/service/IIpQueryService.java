@@ -1,6 +1,6 @@
-package com.mark.bankservice.service;
+package com.mark.bank.service;
 
-import com.mark.bankservice.dto.DbLinkDto;
+import com.mark.bank.dto.DbLinkDto;
 
 import java.util.List;
 

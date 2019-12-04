@@ -1,4 +1,4 @@
-package com.mark.bankservice.config;
+package com.mark.bank.config;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.context.annotation.Bean;

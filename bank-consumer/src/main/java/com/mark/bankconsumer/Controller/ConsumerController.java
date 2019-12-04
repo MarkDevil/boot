@@ -29,7 +29,7 @@ public class ConsumerController {
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String getShowIndex() {
-        return restTemplate.getForEntity("http://BANK-SERVICE/showIndex", String.class).getBody();
+        return restTemplate.getForEntity("http://BANK-SERVICE/", String.class).getBody();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.mark.bankservice.utils;
+package com.mark.bank.utils;
 
 import org.springframework.util.StopWatch;
 
