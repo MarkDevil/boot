@@ -15,7 +15,6 @@ public class ConsumerController {
 
     final RestTemplate restTemplate;
 
-
     @Autowired
     public ConsumerController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
